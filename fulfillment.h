@@ -3,7 +3,7 @@
 #include <GL/freeglut.h>
 #include <stdlib.h>
 
-GLfloat r, g, b;
+GLfloat r, g, b, r1, g1, b1, r2, g2, b2;
 GLubyte tux[] = {
     0x0, 0xff, 0xff, 0x0,
     0x0, 0xf0, 0xf, 0x0,
@@ -46,7 +46,7 @@ namespace fulfill {
         glDisable(GL_POLYGON_STIPPLE);
 
         glPolygonMode(GL_BACK, GL_LINE);
-        glColor3f(1.0, 1.0, 0.0);
+        glColor3f(r2, g2, b2);
         glBegin(GL_POLYGON);
         glVertex2i(30, 226);
         glVertex2i(113, 226);
@@ -55,7 +55,7 @@ namespace fulfill {
         glEnd();
 
         glPolygonMode(GL_BACK, GL_FILL);
-        glColor3f(1.0, 0.0, 1.0);
+        glColor3f(r1, g1, b1);
         glBegin(GL_POLYGON);
         glVertex2i(143, 226);
         glVertex2i(226, 226);
@@ -99,11 +99,26 @@ namespace fulfill {
     void changeColor(int button, int state, int x, int y) {
         switch (button) {
             case GLUT_LEFT_BUTTON:
-                if (state == GLUT_DOWN && ((30<=x) && (x<=113)) && ((145<=y) && (y<=226))) {
-                    r = (GLfloat) rand() / (RAND_MAX + 1.0);
-                    g = (GLfloat) rand() / (RAND_MAX + 1.0);
-                    b = (GLfloat) rand() / (RAND_MAX + 1.0);
-                    glutPostRedisplay();
+                if (state == GLUT_DOWN) {
+                    if (((30<=x) && (x<=113)) && ((145<=y) && (y<=226))){
+                        r = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        g = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        b = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        glutPostRedisplay();
+                    }
+                    if (((143<=x) && (x<=226)) && ((31<=y) && (y<=113))){
+                        r1 = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        g1 = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        b1 = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        glutPostRedisplay();
+                    }
+                    if (((30<=x) && (x<=113)) && ((31<=y) && (y<=113))){
+                        r2 = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        g2 = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        b2 = (GLfloat) rand() / (RAND_MAX + 1.0);
+                        glutPostRedisplay();
+                    }
+                    
                 }
                 break;
         }
